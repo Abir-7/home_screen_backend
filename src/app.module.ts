@@ -7,6 +7,12 @@ import { UserModule } from './user/user.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { UserAuthenticationModule } from './user-authentication/user-authentication.module';
 import { UserPreferenceModule } from './user-preference/user-preference.module';
+import { LocationCheckinModule } from './location-checkin/location-checkin.module';
+import { PostLocationCheckinModule } from './post-location-checkin/post-location-checkin.module';
+import { PostModule } from './post/post.module';
+import { PostTaggedUserModule } from './post-tagged-user/post-tagged-user.module';
+import { StoryModule } from './story/story.module';
+import { StoryViewModule } from './story-view/story-view.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -28,6 +34,12 @@ import { UserPreferenceModule } from './user-preference/user-preference.module';
     UserProfileModule,
     UserAuthenticationModule,
     UserPreferenceModule,
+    LocationCheckinModule,
+    PostLocationCheckinModule,
+    PostModule,
+    PostTaggedUserModule,
+    StoryModule,
+    StoryViewModule,
   ],
   controllers: [AppController],
   providers: [AppService],

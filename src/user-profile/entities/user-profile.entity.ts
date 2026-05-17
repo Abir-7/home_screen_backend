@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -14,8 +15,11 @@ export class UserProfile {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({ nullable: true })
   full_name!: string;
+
+  @Column({ nullable: true })
+  profile_image!: string;
 
   @Column({ unique: true, nullable: true })
   user_name!: string;

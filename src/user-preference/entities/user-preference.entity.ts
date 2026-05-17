@@ -6,6 +6,7 @@ import {
   JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  Index,
 } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
 
@@ -14,6 +15,7 @@ export class UserPreference {
   @PrimaryGeneratedColumn()
   id!: number;
 
+  @Index()
   @Column()
   user_id!: number;
 
