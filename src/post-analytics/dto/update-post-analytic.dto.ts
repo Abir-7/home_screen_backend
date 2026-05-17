@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsNumber } from 'class-validator';
 
-export class CreateUserFollowDto {
+export class UpdatePostAnalyticDto {
   @IsNumber()
   @IsNotEmpty()
-  following_id!: number;
+  post_id!: number;
 }

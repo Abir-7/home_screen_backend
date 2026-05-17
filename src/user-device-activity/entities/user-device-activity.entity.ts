@@ -3,11 +3,11 @@ import { BaseEntity } from '../../common/entities/base.entity';
 import { User } from '../../user/entities/user.entity';
 
 @Entity('user_device_activities')
-@Index(['userId', 'deviceId'])
+@Index(['user_id', 'deviceId'])
 @Index(['ipAddress'])
 export class UserDeviceActivity extends BaseEntity {
   @Column({ name: 'user_id' })
-  userId!: number;
+  user_id!: number;
 
   @Column({ name: 'device_id' })
   deviceId!: string;

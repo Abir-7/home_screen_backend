@@ -14,34 +14,34 @@ export class UserProfile {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ nullable: true })
+  @Column({ name: 'full_name', nullable: true })
   full_name!: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'profile_image', nullable: true })
   profile_image!: string;
 
-  @Column({ unique: true, nullable: true })
+  @Column({ name: 'user_name', unique: true, nullable: true })
   user_name!: string;
 
-  @Column({ unique: true, nullable: true })
+  @Column({ name: 'national_id', unique: true, nullable: true })
   national_id!: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ name: 'address', type: 'text', nullable: true })
   address!: string;
 
-  @Column({ type: 'date', nullable: true })
+  @Column({ name: 'birth_date', type: 'date', nullable: true })
   birth_date!: Date;
 
-  @Column({ nullable: true })
+  @Column({ name: 'gender', nullable: true })
   gender!: string;
 
   @OneToOne(() => User, (user: User) => user.profile)
   @JoinColumn()
   user!: User;
 
-  @CreateDateColumn()
-  createdAt!: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  created_at!: Date;
 
-  @UpdateDateColumn()
-  last_update!: Date;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updated_at!: Date;
 }

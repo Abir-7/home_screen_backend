@@ -34,9 +34,9 @@ export class UserAuthentication {
   @ManyToOne(() => User, (user: User) => user.authentications)
   user!: User;
 
-  @CreateDateColumn()
-  createdAt!: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  created_at!: Date;
 
-  @UpdateDateColumn()
-  last_update!: Date;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updated_at!: Date;
 }

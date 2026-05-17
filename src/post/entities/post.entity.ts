@@ -43,7 +43,7 @@ export enum ContentType {
 export class Post extends BaseEntity {
   @Index()
   @Column({ name: 'user_id' })
-  userId!: number;
+  user_id!: number;
 
   @Column({
     name: 'post_type',
@@ -51,16 +51,16 @@ export class Post extends BaseEntity {
     enum: PostType,
     default: PostType.REEL,
   })
-  postType!: PostType;
+  post_type!: PostType;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ name: 'caption', type: 'text', nullable: true })
   caption!: string;
 
   @Column({ name: 'image_url', type: 'varchar', length: 500, nullable: true })
-  imageUrl!: string;
+  image_url!: string;
 
   @Column({ name: 'video_url', type: 'varchar', length: 500, nullable: true })
-  videoUrl!: string;
+  video_url!: string;
 
   @Column({
     name: 'content_type',
@@ -68,10 +68,10 @@ export class Post extends BaseEntity {
     enum: ContentType,
     nullable: true,
   })
-  contentType!: ContentType;
+  content_type!: ContentType;
 
   @Column({ name: 'allow_comments', default: true })
-  allowComments!: boolean;
+  allow_comments!: boolean;
 
   @Column({
     name: 'cover_image_url',
@@ -79,9 +79,10 @@ export class Post extends BaseEntity {
     length: 500,
     nullable: true,
   })
-  coverImageUrl!: string;
+  cover_image_url!: string;
 
   @Column({
+    name: 'audience',
     type: 'enum',
     enum: PostAudience,
     default: PostAudience.EVERYONE,
@@ -89,9 +90,10 @@ export class Post extends BaseEntity {
   audience!: PostAudience;
 
   @Column({ name: 'share_to_story', default: false })
-  shareToStory!: boolean;
+  share_to_story!: boolean;
 
   @Column({
+    name: 'status',
     type: 'enum',
     enum: PostStatus,
     default: PostStatus.PUBLISHED,
@@ -100,14 +102,14 @@ export class Post extends BaseEntity {
 
   @Index()
   @Column({ name: 'published_at', type: 'timestamptz', nullable: true })
-  publishedAt!: Date;
+  published_at!: Date;
 
   @Index()
   @Column({ name: 'original_post_id', nullable: true })
-  originalPostId!: number;
+  original_post_id!: number;
 
   @Column({ name: 'repost_caption', type: 'text', nullable: true })
-  repostCaption!: string;
+  repost_caption!: string;
 
   // ─── Relations ───────────────────────────────────────────────
 
@@ -121,19 +123,19 @@ export class Post extends BaseEntity {
     onDelete: 'SET NULL',
   })
   @JoinColumn({ name: 'original_post_id' })
-  originalPost!: Post;
+  original_post!: Post;
 
-  @OneToMany(() => Post, (post) => post.originalPost)
+  @OneToMany(() => Post, (post) => post.original_post)
   reposts!: Post[];
 
   @OneToOne(() => Story, (story) => story.post)
   story!: Story;
 
   @OneToMany(() => PostTaggedUser, (tag) => tag.post, { cascade: true })
-  taggedUsers!: PostTaggedUser[];
+  tagged_users!: PostTaggedUser[];
 
   @OneToOne(() => PostLocationCheckin, (pl) => pl.post, { cascade: true })
-  postLocationCheckin!: PostLocationCheckin;
+  post_location_checkin!: PostLocationCheckin;
 
   @OneToMany(() => PostLike, (like) => like.post, { cascade: true })
   likes!: PostLike[];

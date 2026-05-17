@@ -11,18 +11,18 @@ export class UserSessionService {
     private readonly repository: Repository<UserSession>,
   ) {}
 
-  async create(userId: number, dto: CreateUserSessionDto) {
+  async create(user_id: number, dto: CreateUserSessionDto) {
     const session = this.repository.create({
-      userId,
+      user_id,
       ...dto,
       expiresAt: new Date(dto.expiresAt),
     });
     return await this.repository.save(session);
   }
 
-  async findActive(userId: number) {
+  async findActive(user_id: number) {
     return await this.repository.find({
-      where: { userId },
+      where: { user_id },
     });
   }
 

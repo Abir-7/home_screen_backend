@@ -12,21 +12,21 @@ import { User } from '../../user/entities/user.entity';
 import { Post } from '../../post/entities/post.entity';
 
 @Entity('post_saves')
-@Unique(['postId', 'userId']) // one save per user per post
+@Unique(['post_id', 'user_id']) // one save per user per post
 export class PostSave {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Index()
   @Column({ name: 'post_id' })
-  postId!: number;
+  post_id!: number;
 
   @Index()
   @Column({ name: 'user_id' })
-  userId!: number;
+  user_id!: number;
 
-  @CreateDateColumn()
-  createdAt!: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  created_at!: Date;
 
   // relations
   @ManyToOne(() => Post, (post) => post.saves, { onDelete: 'CASCADE' })

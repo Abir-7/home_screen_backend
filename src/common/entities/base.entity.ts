@@ -10,15 +10,15 @@ export abstract class BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @CreateDateColumn()
-  createdAt!: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  created_at!: Date;
 
-  @UpdateDateColumn()
-  updatedAt!: Date;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updated_at!: Date;
 
-  @DeleteDateColumn({ nullable: true })
-  deletedAt?: Date;
+  @DeleteDateColumn({ name: 'deleted_at', nullable: true })
+  deleted_at?: Date;
 
-  @Column({ default: false })
+  @Column({ name: 'is_deleted', default: false })
   is_deleted!: boolean;
 }

@@ -11,18 +11,18 @@ export class HidePostService {
     private readonly hiddenPostRepository: Repository<HiddenPost>,
   ) {}
 
-  async hide(userId: number, createHiddenPostDto: CreateHiddenPostDto) {
+  async hide(user_id: number, createHiddenPostDto: CreateHiddenPostDto) {
     const hiddenPost = this.hiddenPostRepository.create({
-      userId,
-      postId: createHiddenPostDto.postId,
+      user_id,
+      post_id: createHiddenPostDto.post_id,
     });
     return await this.hiddenPostRepository.save(hiddenPost);
   }
 
-  async unhide(userId: number, postId: number) {
+  async unhide(user_id: number, post_id: number) {
     return await this.hiddenPostRepository.softDelete({
-      userId,
-      postId,
+      user_id,
+      post_id,
     });
   }
 }

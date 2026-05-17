@@ -21,11 +21,11 @@ export class Story {
 
   @Index()
   @Column({ name: 'user_id' })
-  userId!: number;
+  user_id!: number;
 
   // nullable: story can exist without a feed post (story-only content)
   @Column({ name: 'post_id', nullable: true })
-  postId!: number;
+  post_id!: number;
 
   @Index()
   @Column({
@@ -33,13 +33,13 @@ export class Story {
     type: 'timestamptz',
     default: () => `NOW() + INTERVAL '24 hours'`,
   })
-  expiresAt!: Date;
+  expires_at!: Date;
 
-  @CreateDateColumn()
-  createdAt!: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  created_at!: Date;
 
-  @UpdateDateColumn()
-  last_update!: Date;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updated_at!: Date;
 
   // relations
   @ManyToOne(() => User, (user) => user.stories, { onDelete: 'CASCADE' })

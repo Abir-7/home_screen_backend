@@ -18,14 +18,14 @@ export class UserSessionController {
     @Req() req: AuthenticatedRequest,
     @Body() dto: CreateUserSessionDto,
   ) {
-    const userId = req.user.id;
-    return await this.service.create(userId, dto);
+    const user_id = req.user.id;
+    return await this.service.create(user_id, dto);
   }
 
   @Get()
   async findActive(@Req() req: AuthenticatedRequest) {
-    const userId = req.user.id;
-    return await this.service.findActive(userId);
+    const user_id = req.user.id;
+    return await this.service.findActive(user_id);
   }
 
   @Delete(':token')

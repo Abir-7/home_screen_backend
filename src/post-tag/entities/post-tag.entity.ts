@@ -4,13 +4,13 @@ import { Post } from '../../post/entities/post.entity';
 import { Tag } from '../../tag/entities/tag.entity';
 
 @Entity('post_tags')
-@Index(['postId', 'tagId'], { unique: true })
+@Index(['post_id', 'tag_id'], { unique: true })
 export class PostTag extends BaseEntity {
   @Column({ name: 'post_id' })
-  postId!: number;
+  post_id!: number;
 
   @Column({ name: 'tag_id' })
-  tagId!: number;
+  tag_id!: number;
 
   @ManyToOne(() => Post, (post) => post.id, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'post_id' })

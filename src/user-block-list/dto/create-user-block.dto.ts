@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsNumber } from 'class-validator';
 
-export class CreateUserFollowDto {
+export class CreateUserBlockDto {
   @IsNumber()
   @IsNotEmpty()
-  following_id!: number;
+  blockedId!: number;
 }

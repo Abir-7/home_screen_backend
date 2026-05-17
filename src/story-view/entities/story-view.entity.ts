@@ -12,21 +12,21 @@ import { User } from '../../user/entities/user.entity';
 import { Story } from '../../story/entities/story.entity';
 
 @Entity('story_views')
-@Unique(['storyId', 'viewerUserId']) // one view per user per story
+@Unique(['story_id', 'viewer_user_id']) // one view per user per story
 export class StoryView {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Index()
   @Column({ name: 'story_id' })
-  storyId!: number;
+  story_id!: number;
 
   @Index()
   @Column({ name: 'viewer_user_id' })
-  viewerUserId!: number;
+  viewer_user_id!: number;
 
-  @CreateDateColumn()
-  viewedAt!: Date;
+  @CreateDateColumn({ name: 'viewed_at' })
+  viewed_at!: Date;
 
   // relations
   @ManyToOne(() => Story, (story) => story.views, { onDelete: 'CASCADE' })

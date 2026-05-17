@@ -18,7 +18,7 @@ export class UserDeviceActivityController {
     @Req() req: AuthenticatedRequest,
     @Body() dto: CreateUserDeviceActivityDto,
   ) {
-    const userId = req.user.id;
-    return await this.service.logActivity(userId, dto);
+    const user_id = req.user.id;
+    return await this.service.logActivity(user_id, dto);
   }
 }

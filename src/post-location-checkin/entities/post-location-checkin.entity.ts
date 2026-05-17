@@ -16,16 +16,16 @@ export class PostLocationCheckin {
   id!: number;
 
   @Column({ name: 'post_id' })
-  postId!: number;
+  post_id!: number;
 
   @Column({ name: 'location_checkin_id' })
   locationCheckinId!: number;
 
-  @CreateDateColumn()
-  createdAt!: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  created_at!: Date;
 
   // relations
-  @OneToOne(() => Post, (post) => post.postLocationCheckin, {
+  @OneToOne(() => Post, (post) => post.post_location_checkin, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'post_id' })

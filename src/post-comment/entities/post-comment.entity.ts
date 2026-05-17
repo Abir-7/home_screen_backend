@@ -21,11 +21,11 @@ export enum CommentStatus {
 export class PostComment extends BaseEntity {
   @Index()
   @Column({ name: 'post_id' })
-  postId!: number;
+  post_id!: number;
 
   @Index()
   @Column({ name: 'user_id' })
-  userId!: number;
+  user_id!: number;
 
   // null = top-level comment, set = reply to a comment
   @Index()

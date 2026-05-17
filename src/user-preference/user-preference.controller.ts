@@ -30,9 +30,9 @@ export class UserPreferenceController {
     return this.userPreferenceService.findOne(+id);
   }
 
-  @Get('user/:userId')
-  findByUserId(@Param('userId') userId: string) {
-    return this.userPreferenceService.findByUserId(+userId);
+  @Get('user/:user_id')
+  findByUserId(@Param('user_id') user_id: string) {
+    return this.userPreferenceService.findByUserId(+user_id);
   }
 
   @Patch(':id')

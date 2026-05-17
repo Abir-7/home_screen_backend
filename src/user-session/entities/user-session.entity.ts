@@ -6,7 +6,7 @@ import { User } from '../../user/entities/user.entity';
 export class UserSession extends BaseEntity {
   @Index()
   @Column({ name: 'user_id' })
-  userId!: number;
+  user_id!: number;
 
   @Index()
   @Column({ name: 'session_token', unique: true })

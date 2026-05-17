@@ -4,13 +4,13 @@ import { PostComment } from '../../post-comment/entities/post-comment.entity';
 import { User } from '../../user/entities/user.entity';
 
 @Entity('comment_mentions')
-@Index(['commentId', 'userId'], { unique: true })
+@Index(['comment_id', 'user_id'], { unique: true })
 export class CommentMention extends BaseEntity {
   @Column({ name: 'comment_id' })
-  commentId!: number;
+  comment_id!: number;
 
   @Column({ name: 'user_id' })
-  userId!: number;
+  user_id!: number;
 
   @ManyToOne(() => PostComment, (comment) => comment.id, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'comment_id' })

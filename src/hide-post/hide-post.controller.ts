@@ -18,16 +18,16 @@ export class HidePostController {
     @Req() req: AuthenticatedRequest,
     @Body() createHiddenPostDto: CreateHiddenPostDto,
   ) {
-    const userId = req.user.id;
-    return await this.hidePostService.hide(userId, createHiddenPostDto);
+    const user_id = req.user.id;
+    return await this.hidePostService.hide(user_id, createHiddenPostDto);
   }
 
-  @Delete(':postId')
+  @Delete(':post_id')
   async unhide(
     @Req() req: AuthenticatedRequest,
-    @Param('postId') postId: number,
+    @Param('post_id') post_id: number,
   ) {
-    const userId = req.user.id;
-    return await this.hidePostService.unhide(userId, postId);
+    const user_id = req.user.id;
+    return await this.hidePostService.unhide(user_id, post_id);
   }
 }

@@ -18,8 +18,8 @@ export class UserPreferenceService {
     return this.userPreferenceRepository.findOneBy({ id });
   }
 
-  findByUserId(userId: number) {
-    return this.userPreferenceRepository.find({ where: { user_id: userId } });
+  findByUserId(user_id: number) {
+    return this.userPreferenceRepository.find({ where: { user_id: user_id } });
   }
 
   create(data: Partial<UserPreference>) {

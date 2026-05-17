@@ -4,13 +4,13 @@ import { User } from '../../user/entities/user.entity';
 import { Post } from '../../post/entities/post.entity';
 
 @Entity('hidden_posts')
-@Index(['userId', 'postId'], { unique: true })
+@Index(['user_id', 'post_id'], { unique: true })
 export class HiddenPost extends BaseEntity {
   @Column({ name: 'user_id' })
-  userId!: number;
+  user_id!: number;
 
   @Column({ name: 'post_id' })
-  postId!: number;
+  post_id!: number;
 
   @ManyToOne(() => User, (user) => user.id, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })

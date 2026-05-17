@@ -13,27 +13,27 @@ import { User } from '../../user/entities/user.entity';
 import { Post } from '../../post/entities/post.entity';
 
 @Entity('post_tagged_users')
-@Unique(['postId', 'taggedUserId']) // can't tag same user twice on a post
+@Unique(['post_id', 'tagged_user_id']) // can't tag same user twice on a post
 export class PostTaggedUser {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Index()
   @Column({ name: 'post_id' })
-  postId!: number;
+  post_id!: number;
 
   @Index()
   @Column({ name: 'tagged_user_id' })
-  taggedUserId!: number;
+  tagged_user_id!: number;
 
-  @CreateDateColumn()
-  createdAt!: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  created_at!: Date;
 
-  @UpdateDateColumn()
-  last_update!: Date;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updated_at!: Date;
 
   // relations
-  @ManyToOne(() => Post, (post) => post.taggedUsers, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Post, (post) => post.tagged_users, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'post_id' })
   post!: Post;
 

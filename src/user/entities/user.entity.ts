@@ -13,16 +13,16 @@ import { PostComment } from '../../post-comment/entities/post-comment.entity';
 
 @Entity('users')
 export class User extends BaseEntity {
-  @Column({ unique: true })
+  @Column({ name: 'email', unique: true })
   email!: string;
 
-  @Column({ select: false })
+  @Column({ name: 'password', select: false })
   password!: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'phone', nullable: true })
   phone!: string;
 
-  @Column({ default: false })
+  @Column({ name: 'is_verified', default: false })
   is_verified!: boolean;
 
   @OneToOne(() => UserProfile, (profile) => profile.user)

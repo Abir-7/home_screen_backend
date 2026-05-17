@@ -11,31 +11,31 @@ import { PostLocationCheckin } from '../../post-location-checkin/entities/post-l
 
 @Entity('location_checkins')
 export class LocationCheckin {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'id' })
   id!: number;
 
-  @Column({ type: 'varchar', length: 200 })
+  @Column({ name: 'name', type: 'varchar', length: 200 })
   name!: string;
 
-  @Column({ type: 'varchar', length: 100, nullable: true })
+  @Column({ name: 'city', type: 'varchar', length: 100, nullable: true })
   city!: string;
 
-  @Column({ type: 'varchar', length: 100, nullable: true })
+  @Column({ name: 'country', type: 'varchar', length: 100, nullable: true })
   country!: string;
 
   @Index()
-  @Column({ type: 'decimal', precision: 9, scale: 6, nullable: true })
+  @Column({ name: 'latitude', type: 'decimal', precision: 9, scale: 6, nullable: true })
   latitude!: number;
 
   @Index()
-  @Column({ type: 'decimal', precision: 9, scale: 6, nullable: true })
+  @Column({ name: 'longitude', type: 'decimal', precision: 9, scale: 6, nullable: true })
   longitude!: number;
 
-  @CreateDateColumn()
-  createdAt!: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  created_at!: Date;
 
-  @UpdateDateColumn()
-  last_update!: Date;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updated_at!: Date;
 
   // relations
   @OneToMany(() => PostLocationCheckin, (pl) => pl.locationCheckin)

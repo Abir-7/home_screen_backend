@@ -25,6 +25,9 @@ import { UserSessionModule } from './user-session/user-session.module';
 import { TagModule } from './tag/tag.module';
 import { PostTagModule } from './post-tag/post-tag.module';
 import { MentionModule } from './mention/mention.module';
+import { PostAnalyticsModule } from './post-analytics/post-analytics.module';
+import { UserBlockListModule } from './user-block-list/user-block-list.module';
+import { UserReportModule } from './user-report/user-report.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -63,6 +66,9 @@ import { MentionModule } from './mention/mention.module';
     TagModule,
     PostTagModule,
     MentionModule,
+    PostAnalyticsModule,
+    UserBlockListModule,
+    UserReportModule,
   ],
   controllers: [AppController],
   providers: [AppService],

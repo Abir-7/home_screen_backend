@@ -6,5 +6,5 @@ export class CreateUserProfileDto {
   address?: string;
   birth_date?: Date;
   gender?: string;
-  userId!: number;
+  user_id!: number;
 }

@@ -11,11 +11,11 @@ export class UserDeviceActivityService {
     private readonly repository: Repository<UserDeviceActivity>,
   ) {}
 
-  async logActivity(userId: number, dto: CreateUserDeviceActivityDto) {
+  async logActivity(user_id: number, dto: CreateUserDeviceActivityDto) {
     // Prevent duplicate entries for the same user-device-ip
     const existing = await this.repository.findOne({
       where: {
-        userId,
+        user_id,
         deviceId: dto.deviceId,
         ipAddress: dto.ipAddress,
       },
@@ -24,21 +24,21 @@ export class UserDeviceActivityService {
     if (existing) return existing;
 
     const activity = this.repository.create({
-      userId,
+      user_id,
       ...dto,
     });
     return await this.repository.save(activity);
   }
 
-  async findOtherUsersByDeviceOrIp(userId: number, deviceId: string, ipAddress: string) {
+  async findOtherUsersByDeviceOrIp(user_id: number, deviceId: string, ipAddress: string) {
     return await this.repository
       .createQueryBuilder('activity')
-      .where('activity.userId != :userId', { userId })
+      .where('activity.user_id != :user_id', { user_id })
       .andWhere('(activity.deviceId = :deviceId OR activity.ipAddress = :ipAddress)', {
         deviceId,
         ipAddress,
       })
-      .distinctOn(['activity.userId'])
+      .distinctOn(['activity.user_id'])
       .getMany();
   }
 }

@@ -3,13 +3,13 @@ import { BaseEntity } from '../../common/entities/base.entity';
 import { User } from '../../user/entities/user.entity';
 
 @Entity('user_follows')
-@Index(['followerId', 'followingId'], { unique: true })
+@Index(['follower_id', 'following_id'], { unique: true })
 export class UserFollow extends BaseEntity {
   @Column({ name: 'follower_id' })
-  followerId!: number;
+  follower_id!: number;
 
   @Column({ name: 'following_id' })
-  followingId!: number;
+  following_id!: number;
 
   @ManyToOne(() => User, (user) => user.id, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'follower_id' })

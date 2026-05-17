@@ -5,16 +5,16 @@ import { PostComment } from '../../post-comment/entities/post-comment.entity';
 import { User } from '../../user/entities/user.entity';
 
 @Entity('mentions')
-@Index(['postId', 'commentId', 'userId'], { unique: true })
+@Index(['post_id', 'comment_id', 'user_id'], { unique: true })
 export class Mention extends BaseEntity {
   @Column({ name: 'post_id', nullable: true })
-  postId?: number;
+  post_id?: number;
 
   @Column({ name: 'comment_id', nullable: true })
-  commentId?: number;
+  comment_id?: number;
 
   @Column({ name: 'user_id' })
-  userId!: number;
+  user_id!: number;
 
   @ManyToOne(() => Post, (post) => post.id, {
     nullable: true,

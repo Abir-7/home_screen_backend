@@ -26,26 +26,26 @@ export class UserFollowController {
     @Req() req: AuthenticatedRequest,
     @Body() createUserFollowDto: CreateUserFollowDto,
   ) {
-    const followerId = req.user.id;
-    return await this.userFollowService.follow(followerId, createUserFollowDto);
+    const follower_id = req.user.id;
+    return await this.userFollowService.follow(follower_id, createUserFollowDto);
   }
 
-  @Delete(':followingId')
+  @Delete(':following_id')
   async unfollow(
     @Req() req: AuthenticatedRequest,
-    @Param('followingId') followingId: number,
+    @Param('following_id') following_id: number,
   ) {
-    const followerId = req.user.id;
-    return await this.userFollowService.unfollow(followerId, followingId);
+    const follower_id = req.user.id;
+    return await this.userFollowService.unfollow(follower_id, following_id);
   }
 
-  @Get('following/:userId')
-  async getFollowing(@Param('userId') userId: number) {
-    return await this.userFollowService.getFollowing(userId);
+  @Get('following/:user_id')
+  async getFollowing(@Param('user_id') user_id: number) {
+    return await this.userFollowService.getFollowing(user_id);
   }
 
-  @Get('followers/:userId')
-  async getFollowers(@Param('userId') userId: number) {
-    return await this.userFollowService.getFollowers(userId);
+  @Get('followers/:user_id')
+  async getFollowers(@Param('user_id') user_id: number) {
+    return await this.userFollowService.getFollowers(user_id);
   }
 }

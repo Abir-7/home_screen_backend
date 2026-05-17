@@ -11,31 +11,31 @@ export class UserFollowService {
     private readonly userFollowRepository: Repository<UserFollow>,
   ) {}
 
-  async follow(followerId: number, createUserFollowDto: CreateUserFollowDto) {
+  async follow(follower_id: number, createUserFollowDto: CreateUserFollowDto) {
     const follow = this.userFollowRepository.create({
-      followerId,
-      followingId: createUserFollowDto.followingId,
+      follower_id,
+      following_id: createUserFollowDto.following_id,
     });
     return await this.userFollowRepository.save(follow);
   }
 
-  async unfollow(followerId: number, followingId: number) {
+  async unfollow(follower_id: number, following_id: number) {
     return await this.userFollowRepository.softDelete({
-      followerId,
-      followingId,
+      follower_id,
+      following_id,
     });
   }
 
-  async getFollowing(userId: number) {
+  async getFollowing(user_id: number) {
     return await this.userFollowRepository.find({
-      where: { followerId: userId },
+      where: { follower_id: user_id },
       relations: ['following'],
     });
   }
 
-  async getFollowers(userId: number) {
+  async getFollowers(user_id: number) {
     return await this.userFollowRepository.find({
-      where: { followingId: userId },
+      where: { following_id: user_id },
       relations: ['follower'],
     });
   }
