@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { PostLocationCheckinService } from './post-location-checkin.service';
 import { CreatePostLocationCheckinDto } from './dto/create-post-location-checkin.dto';
 import { UpdatePostLocationCheckinDto } from './dto/update-post-location-checkin.dto';
 
 @Controller('post-location-checkin')
 export class PostLocationCheckinController {
-  constructor(private readonly postLocationCheckinService: PostLocationCheckinService) {}
+  constructor(
+    private readonly postLocationCheckinService: PostLocationCheckinService,
+  ) {}
 
   @Post()
   create(@Body() createPostLocationCheckinDto: CreatePostLocationCheckinDto) {
@@ -23,8 +33,14 @@ export class PostLocationCheckinController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostLocationCheckinDto: UpdatePostLocationCheckinDto) {
-    return this.postLocationCheckinService.update(+id, updatePostLocationCheckinDto);
+  update(
+    @Param('id') id: string,
+    @Body() updatePostLocationCheckinDto: UpdatePostLocationCheckinDto,
+  ) {
+    return this.postLocationCheckinService.update(
+      +id,
+      updatePostLocationCheckinDto,
+    );
   }
 
   @Delete(':id')

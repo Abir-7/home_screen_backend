@@ -1,11 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import {
-  Entity,
-  Column,
-  OneToOne,
-  OneToMany,
-} from 'typeorm';
+import { Entity, Column, OneToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../common/entities/base.entity';
 import { UserProfile } from '../../user-profile/entities/user-profile.entity';
 import { Post } from '../../post/entities/post.entity';
@@ -14,7 +8,6 @@ import { PostTaggedUser } from '../../post-tagged-user/entities/post-tagged-user
 import { UserPreference } from '../../user-preference/entities/user-preference.entity';
 import { UserAuthentication } from '../../user-authentication/entities/user-authentication.entity';
 import { PostLike } from '../../post-like/entities/post-like.entity';
-import { PostRepost } from '../../post-repost/entities/post-repost.entity';
 import { PostSave } from '../../post-save/entities/post-save.entity';
 import { PostComment } from '../../post-comment/entities/post-comment.entity';
 
@@ -52,9 +45,6 @@ export class User extends BaseEntity {
 
   @OneToMany(() => PostLike, (like) => like.user)
   likedPosts!: PostLike[];
-
-  @OneToMany(() => PostRepost, (repost) => repost.user)
-  reposts!: PostRepost[];
 
   @OneToMany(() => PostSave, (save) => save.user)
   savedPosts!: PostSave[];

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { StoryViewService } from './story-view.service';
 import { CreateStoryViewDto } from './dto/create-story-view.dto';
 import { UpdateStoryViewDto } from './dto/update-story-view.dto';
@@ -23,7 +31,10 @@ export class StoryViewController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStoryViewDto: UpdateStoryViewDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateStoryViewDto: UpdateStoryViewDto,
+  ) {
     return this.storyViewService.update(+id, updateStoryViewDto);
   }
 

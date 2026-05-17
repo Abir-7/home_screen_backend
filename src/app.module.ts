@@ -18,6 +18,10 @@ import { PostLikeModule } from './post-like/post-like.module';
 import { PostSaveModule } from './post-save/post-save.module';
 import { PostCommentModule } from './post-comment/post-comment.module';
 import { PostCommentLikeModule } from './post-comment-like/post-comment-like.module';
+import { UserFollowModule } from './user-follow/user-follow.module';
+import { HidePostModule } from './hide-post/hide-post.module';
+import { UserDeviceActivityModule } from './user-device-activity/user-device-activity.module';
+import { UserSessionModule } from './user-session/user-session.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -49,6 +53,10 @@ import { PostCommentLikeModule } from './post-comment-like/post-comment-like.mod
     PostSaveModule,
     PostCommentModule,
     PostCommentLikeModule,
+    UserFollowModule,
+    HidePostModule,
+    UserDeviceActivityModule,
+    UserSessionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

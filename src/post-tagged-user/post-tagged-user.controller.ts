@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { PostTaggedUserService } from './post-tagged-user.service';
 import { CreatePostTaggedUserDto } from './dto/create-post-tagged-user.dto';
 import { UpdatePostTaggedUserDto } from './dto/update-post-tagged-user.dto';
@@ -23,7 +31,10 @@ export class PostTaggedUserController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostTaggedUserDto: UpdatePostTaggedUserDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updatePostTaggedUserDto: UpdatePostTaggedUserDto,
+  ) {
     return this.postTaggedUserService.update(+id, updatePostTaggedUserDto);
   }
 

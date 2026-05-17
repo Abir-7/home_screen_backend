@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { PostCommentLikeService } from './post-comment-like.service';
 import { CreatePostCommentLikeDto } from './dto/create-post-comment-like.dto';
 import { UpdatePostCommentLikeDto } from './dto/update-post-comment-like.dto';
 
 @Controller('post-comment-like')
 export class PostCommentLikeController {
-  constructor(private readonly postCommentLikeService: PostCommentLikeService) {}
+  constructor(
+    private readonly postCommentLikeService: PostCommentLikeService,
+  ) {}
 
   @Post()
   create(@Body() createPostCommentLikeDto: CreatePostCommentLikeDto) {
@@ -23,7 +33,10 @@ export class PostCommentLikeController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostCommentLikeDto: UpdatePostCommentLikeDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updatePostCommentLikeDto: UpdatePostCommentLikeDto,
+  ) {
     return this.postCommentLikeService.update(+id, updatePostCommentLikeDto);
   }
 

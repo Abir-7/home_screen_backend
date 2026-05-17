@@ -16,7 +16,10 @@ export class PostLocationCheckinService {
     return `This action returns a #${id} postLocationCheckin`;
   }
 
-  update(id: number, updatePostLocationCheckinDto: UpdatePostLocationCheckinDto) {
+  update(
+    id: number,
+    updatePostLocationCheckinDto: UpdatePostLocationCheckinDto,
+  ) {
     return `This action updates a #${id} postLocationCheckin`;
   }
 
