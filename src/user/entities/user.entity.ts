@@ -13,8 +13,8 @@ import { UserProfile } from '../../user-profile/entities/user-profile.entity';
 import { Post } from '../../post/entities/post.entity';
 import { Story } from '../../story/entities/story.entity';
 import { PostTaggedUser } from '../../post-tagged-user/entities/post-tagged-user.entity';
-import { UserPreference } from 'src/user-preference/entities/user-preference.entity';
-import { UserAuthentication } from 'src/user-authentication/entities/user-authentication.entity';
+import { UserPreference } from '../../user-preference/entities/user-preference.entity';
+import { UserAuthentication } from '../../user-authentication/entities/user-authentication.entity';
 
 @Entity('users')
 export class User {
