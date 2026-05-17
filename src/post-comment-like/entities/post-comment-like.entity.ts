@@ -1,22 +1,11 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  ManyToOne,
-  JoinColumn,
-  Unique,
-  Index,
-} from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn, Unique, Index } from 'typeorm';
+import { BaseEntity } from '../../common/entities/base.entity';
 import { User } from '../../user/entities/user.entity';
 import { PostComment } from '../../post-comment/entities/post-comment.entity';
 
 @Entity('post_comment_likes')
 @Unique(['commentId', 'userId']) // one like per user per comment
-export class PostCommentLike {
-  @PrimaryGeneratedColumn()
-  id!: number;
-
+export class PostCommentLike extends BaseEntity {
   @Index()
   @Column({ name: 'comment_id' })
   commentId!: number;
@@ -24,9 +13,6 @@ export class PostCommentLike {
   @Index()
   @Column({ name: 'user_id' })
   userId!: number;
-
-  @CreateDateColumn()
-  createdAt!: Date;
 
   // relations
   @ManyToOne(() => PostComment, (comment) => comment.likes, {

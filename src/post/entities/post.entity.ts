@@ -1,21 +1,18 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
-  UpdateDateColumn,
   ManyToOne,
   OneToOne,
   OneToMany,
   JoinColumn,
   Index,
 } from 'typeorm';
+import { BaseEntity } from '../../common/entities/base.entity';
 import { User } from '../../user/entities/user.entity';
 import { Story } from '../../story/entities/story.entity';
 import { PostTaggedUser } from '../../post-tagged-user/entities/post-tagged-user.entity';
 import { PostLocationCheckin } from '../../post-location-checkin/entities/post-location-checkin.entity';
 import { PostLike } from '../../post-like/entities/post-like.entity';
-import { PostRepost } from '../../post-repost/entities/post-repost.entity';
 import { PostSave } from '../../post-save/entities/post-save.entity';
 import { PostComment } from '../../post-comment/entities/post-comment.entity';
 
@@ -38,10 +35,7 @@ export enum PostStatus {
 }
 
 @Entity('posts')
-export class Post {
-  @PrimaryGeneratedColumn()
-  id!: number;
-
+export class Post extends BaseEntity {
   @Index()
   @Column({ name: 'user_id' })
   userId!: number;
@@ -86,16 +80,29 @@ export class Post {
   @Column({ name: 'published_at', type: 'timestamptz', nullable: true })
   publishedAt!: Date;
 
-  @CreateDateColumn()
-  createdAt!: Date;
+  @Index()
+  @Column({ name: 'original_post_id', nullable: true })
+  originalPostId!: number;
 
-  @UpdateDateColumn()
-  last_update!: Date;
+  @Column({ name: 'repost_caption', type: 'text', nullable: true })
+  repostCaption!: string;
 
-  // relations
+  // ─── Relations ───────────────────────────────────────────────
+
   @ManyToOne(() => User, (user) => user.posts, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user!: User;
+
+  // self-referencing repost
+  @ManyToOne(() => Post, (post) => post.reposts, {
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
+  @JoinColumn({ name: 'original_post_id' })
+  originalPost!: Post;
+
+  @OneToMany(() => Post, (post) => post.originalPost)
+  reposts!: Post[];
 
   @OneToOne(() => Story, (story) => story.post)
   story!: Story;
@@ -108,9 +115,6 @@ export class Post {
 
   @OneToMany(() => PostLike, (like) => like.post, { cascade: true })
   likes!: PostLike[];
-
-  @OneToMany(() => PostRepost, (repost) => repost.post, { cascade: true })
-  reposts!: PostRepost[];
 
   @OneToMany(() => PostSave, (save) => save.post, { cascade: true })
   saves!: PostSave[];

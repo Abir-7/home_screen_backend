@@ -2,13 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
-  UpdateDateColumn,
   OneToOne,
   OneToMany,
 } from 'typeorm';
+import { BaseEntity } from '../../common/entities/base.entity';
 import { UserProfile } from '../../user-profile/entities/user-profile.entity';
 import { Post } from '../../post/entities/post.entity';
 import { Story } from '../../story/entities/story.entity';
@@ -21,10 +19,7 @@ import { PostSave } from '../../post-save/entities/post-save.entity';
 import { PostComment } from '../../post-comment/entities/post-comment.entity';
 
 @Entity('users')
-export class User {
-  @PrimaryGeneratedColumn()
-  id!: number;
-
+export class User extends BaseEntity {
   @Column({ unique: true })
   email!: string;
 
@@ -66,10 +61,4 @@ export class User {
 
   @OneToMany(() => PostComment, (comment) => comment.user)
   comments!: PostComment[];
-
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  last_update!: Date;
 }

@@ -1,15 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
-  UpdateDateColumn,
   ManyToOne,
   OneToMany,
   JoinColumn,
   Index,
 } from 'typeorm';
+import { BaseEntity } from '../../common/entities/base.entity';
 import { User } from '../../user/entities/user.entity';
 import { Post } from '../../post/entities/post.entity';
 import { PostCommentLike } from '../../post-comment-like/entities/post-comment-like.entity';
@@ -21,10 +19,7 @@ export enum CommentStatus {
 }
 
 @Entity('post_comments')
-export class PostComment {
-  @PrimaryGeneratedColumn()
-  id!: number;
-
+export class PostComment extends BaseEntity {
   @Index()
   @Column({ name: 'post_id' })
   postId!: number;
@@ -47,12 +42,6 @@ export class PostComment {
     default: CommentStatus.ACTIVE,
   })
   status!: CommentStatus;
-
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  last_update!: Date;
 
   // relations
   @ManyToOne(() => Post, (post) => post.comments, { onDelete: 'CASCADE' })
