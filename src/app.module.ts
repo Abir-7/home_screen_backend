@@ -24,6 +24,7 @@ import { UserDeviceActivityModule } from './user-device-activity/user-device-act
 import { UserSessionModule } from './user-session/user-session.module';
 import { TagModule } from './tag/tag.module';
 import { PostTagModule } from './post-tag/post-tag.module';
+import { MentionModule } from './mention/mention.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -61,6 +62,7 @@ import { PostTagModule } from './post-tag/post-tag.module';
     UserSessionModule,
     TagModule,
     PostTagModule,
+    MentionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
