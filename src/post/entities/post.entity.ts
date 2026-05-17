@@ -34,6 +34,11 @@ export enum PostStatus {
   ARCHIVED = 'archived',
 }
 
+export enum ContentType {
+  IMAGE = 'image',
+  VIDEO = 'video',
+}
+
 @Entity('posts')
 export class Post extends BaseEntity {
   @Index()
@@ -50,6 +55,23 @@ export class Post extends BaseEntity {
 
   @Column({ type: 'text', nullable: true })
   caption!: string;
+
+  @Column({ name: 'image_url', type: 'varchar', length: 500, nullable: true })
+  imageUrl!: string;
+
+  @Column({ name: 'video_url', type: 'varchar', length: 500, nullable: true })
+  videoUrl!: string;
+
+  @Column({
+    name: 'content_type',
+    type: 'enum',
+    enum: ContentType,
+    nullable: true,
+  })
+  contentType!: ContentType;
+
+  @Column({ name: 'allow_comments', default: true })
+  allowComments!: boolean;
 
   @Column({
     name: 'cover_image_url',
