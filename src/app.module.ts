@@ -22,6 +22,8 @@ import { UserFollowModule } from './user-follow/user-follow.module';
 import { HidePostModule } from './hide-post/hide-post.module';
 import { UserDeviceActivityModule } from './user-device-activity/user-device-activity.module';
 import { UserSessionModule } from './user-session/user-session.module';
+import { TagModule } from './tag/tag.module';
+import { PostTagModule } from './post-tag/post-tag.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -57,6 +59,8 @@ import { UserSessionModule } from './user-session/user-session.module';
     HidePostModule,
     UserDeviceActivityModule,
     UserSessionModule,
+    TagModule,
+    PostTagModule,
   ],
   controllers: [AppController],
   providers: [AppService],
