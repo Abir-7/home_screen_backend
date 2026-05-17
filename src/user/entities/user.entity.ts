@@ -15,6 +15,10 @@ import { Story } from '../../story/entities/story.entity';
 import { PostTaggedUser } from '../../post-tagged-user/entities/post-tagged-user.entity';
 import { UserPreference } from '../../user-preference/entities/user-preference.entity';
 import { UserAuthentication } from '../../user-authentication/entities/user-authentication.entity';
+import { PostLike } from '../../post-like/entities/post-like.entity';
+import { PostRepost } from '../../post-repost/entities/post-repost.entity';
+import { PostSave } from '../../post-save/entities/post-save.entity';
+import { PostComment } from '../../post-comment/entities/post-comment.entity';
 
 @Entity('users')
 export class User {
@@ -50,6 +54,18 @@ export class User {
 
   @OneToMany(() => UserAuthentication, (auth) => auth.user)
   authentications!: UserAuthentication[];
+
+  @OneToMany(() => PostLike, (like) => like.user)
+  likedPosts!: PostLike[];
+
+  @OneToMany(() => PostRepost, (repost) => repost.user)
+  reposts!: PostRepost[];
+
+  @OneToMany(() => PostSave, (save) => save.user)
+  savedPosts!: PostSave[];
+
+  @OneToMany(() => PostComment, (comment) => comment.user)
+  comments!: PostComment[];
 
   @CreateDateColumn()
   createdAt!: Date;

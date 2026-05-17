@@ -12,10 +12,8 @@
     "allowSyntheticDefaultImports": true,
     "target": "ES2023",
     "sourceMap": true,
-
-    "rootDir": "./src",         // ← fixes ts(5011)
- "outDir": "dist",
-    "baseUrl": ".",
+    "outDir": "./dist",
+    "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
@@ -23,7 +21,5 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  }
 }

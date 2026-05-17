@@ -13,6 +13,11 @@ import { PostModule } from './post/post.module';
 import { PostTaggedUserModule } from './post-tagged-user/post-tagged-user.module';
 import { StoryModule } from './story/story.module';
 import { StoryViewModule } from './story-view/story-view.module';
+import { PostLikeModule } from './post-like/post-like.module';
+import { PostRepostModule } from './post-repost/post-repost.module';
+import { PostSaveModule } from './post-save/post-save.module';
+import { PostCommentModule } from './post-comment/post-comment.module';
+import { PostCommentLikeModule } from './post-comment-like/post-comment-like.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -40,6 +45,11 @@ import { StoryViewModule } from './story-view/story-view.module';
     PostTaggedUserModule,
     StoryModule,
     StoryViewModule,
+    PostLikeModule,
+    PostRepostModule,
+    PostSaveModule,
+    PostCommentModule,
+    PostCommentLikeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

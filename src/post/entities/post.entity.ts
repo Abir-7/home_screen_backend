@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -16,6 +14,10 @@ import { User } from '../../user/entities/user.entity';
 import { Story } from '../../story/entities/story.entity';
 import { PostTaggedUser } from '../../post-tagged-user/entities/post-tagged-user.entity';
 import { PostLocationCheckin } from '../../post-location-checkin/entities/post-location-checkin.entity';
+import { PostLike } from '../../post-like/entities/post-like.entity';
+import { PostRepost } from '../../post-repost/entities/post-repost.entity';
+import { PostSave } from '../../post-save/entities/post-save.entity';
+import { PostComment } from '../../post-comment/entities/post-comment.entity';
 
 export enum PostType {
   REEL = 'reel',
@@ -103,4 +105,16 @@ export class Post {
 
   @OneToOne(() => PostLocationCheckin, (pl) => pl.post, { cascade: true })
   postLocationCheckin!: PostLocationCheckin;
+
+  @OneToMany(() => PostLike, (like) => like.post, { cascade: true })
+  likes!: PostLike[];
+
+  @OneToMany(() => PostRepost, (repost) => repost.post, { cascade: true })
+  reposts!: PostRepost[];
+
+  @OneToMany(() => PostSave, (save) => save.post, { cascade: true })
+  saves!: PostSave[];
+
+  @OneToMany(() => PostComment, (comment) => comment.post, { cascade: true })
+  comments!: PostComment[];
 }
