@@ -3,31 +3,34 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UserModule } from './user/user.module';
-import { UserProfileModule } from './user-profile/user-profile.module';
-import { UserAuthenticationModule } from './user-authentication/user-authentication.module';
-import { UserPreferenceModule } from './user-preference/user-preference.module';
-import { LocationCheckinModule } from './location-checkin/location-checkin.module';
-import { PostLocationCheckinModule } from './post-location-checkin/post-location-checkin.module';
-import { PostModule } from './post/post.module';
-import { PostTaggedUserModule } from './post-tagged-user/post-tagged-user.module';
-import { StoryModule } from './story/story.module';
-import { StoryViewModule } from './story-view/story-view.module';
-import { PostLikeModule } from './post-like/post-like.module';
+import { UserModule } from './modules/user/user.module';
+import { UserProfileModule } from './modules/user-profile/user-profile.module';
+import { UserAuthenticationModule } from './modules/user-authentication/user-authentication.module';
+import { UserPreferenceModule } from './modules/user-preference/user-preference.module';
+import { LocationCheckinModule } from './modules/location-checkin/location-checkin.module';
+import { PostLocationCheckinModule } from './modules/post-location-checkin/post-location-checkin.module';
+import { PostModule } from './modules/post/post.module';
+import { PostTaggedUserModule } from './modules/post-tagged-user/post-tagged-user.module';
+import { StoryModule } from './modules/story/story.module';
+import { StoryViewModule } from './modules/story-view/story-view.module';
+import { PostLikeModule } from './modules/post-like/post-like.module';
 
-import { PostSaveModule } from './post-save/post-save.module';
-import { PostCommentModule } from './post-comment/post-comment.module';
-import { PostCommentLikeModule } from './post-comment-like/post-comment-like.module';
-import { UserFollowModule } from './user-follow/user-follow.module';
-import { HidePostModule } from './hide-post/hide-post.module';
-import { UserDeviceActivityModule } from './user-device-activity/user-device-activity.module';
-import { UserSessionModule } from './user-session/user-session.module';
-import { TagModule } from './tag/tag.module';
-import { PostTagModule } from './post-tag/post-tag.module';
-import { MentionModule } from './mention/mention.module';
-import { PostAnalyticsModule } from './post-analytics/post-analytics.module';
-import { UserBlockListModule } from './user-block-list/user-block-list.module';
-import { UserReportModule } from './user-report/user-report.module';
+import { PostSaveModule } from './modules/post-save/post-save.module';
+import { PostCommentModule } from './modules/post-comment/post-comment.module';
+import { PostCommentLikeModule } from './modules/post-comment-like/post-comment-like.module';
+import { UserFollowModule } from './modules/user-follow/user-follow.module';
+import { HidePostModule } from './modules/hide-post/hide-post.module';
+import { UserDeviceActivityModule } from './modules/user-device-activity/user-device-activity.module';
+import { UserSessionModule } from './modules/user-session/user-session.module';
+import { TagModule } from './modules/tag/tag.module';
+import { PostTagModule } from './modules/post-tag/post-tag.module';
+import { MentionModule } from './modules/mention/mention.module';
+import { PostAnalyticsModule } from './modules/post-analytics/post-analytics.module';
+import { UserBlockListModule } from './modules/user-block-list/user-block-list.module';
+import { UserReportModule } from './modules/user-report/user-report.module';
+import { CategoryModule } from './modules/category/category.module';
+import { InterestModule } from './modules/interest/interest.module';
+import { AuthModule } from './modules/auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -45,6 +48,7 @@ import { UserReportModule } from './user-report/user-report.module';
       }),
       inject: [ConfigService],
     }),
+    AuthModule,
     UserModule,
     UserProfileModule,
     UserAuthenticationModule,
@@ -69,6 +73,8 @@ import { UserReportModule } from './user-report/user-report.module';
     PostAnalyticsModule,
     UserBlockListModule,
     UserReportModule,
+    CategoryModule,
+    InterestModule,
   ],
   controllers: [AppController],
   providers: [AppService],
