@@ -14,10 +14,7 @@ export class UserReportController {
   constructor(private readonly service: UserReportService) {}
 
   @Post()
-  async create(
-    @Req() req: AuthenticatedRequest,
-    @Body() dto: CreateReportDto,
-  ) {
+  async create(@Req() req: AuthenticatedRequest, @Body() dto: CreateReportDto) {
     const reporterId = req.user.id;
     return await this.service.create(reporterId, dto);
   }

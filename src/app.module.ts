@@ -31,8 +31,10 @@ import { UserReportModule } from './modules/user-report/user-report.module';
 import { CategoryModule } from './modules/category/category.module';
 import { InterestModule } from './modules/interest/interest.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { QueueModule } from './modules/queue/queue.module';
 @Module({
   imports: [
+    QueueModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],

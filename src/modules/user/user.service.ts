@@ -1,26 +1,57 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './entities/user.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+  ) {}
+
+  async create(createUserDto: Partial<User>): Promise<User> {
+    const user = this.userRepository.create(createUserDto);
+    return await this.userRepository.save(user);
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findByEmail(email: string, includePassword = false): Promise<User | null> {
+    if (includePassword) {
+      return await this.userRepository
+        .createQueryBuilder('user')
+        .addSelect('user.password')
+        .where('user.email = :email', { email })
+        .getOne();
+    }
+    return await this.userRepository.findOne({ where: { email } });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findByPhone(phone: string, includePassword = false): Promise<User | null> {
+    if (includePassword) {
+      return await this.userRepository
+        .createQueryBuilder('user')
+        .addSelect('user.password')
+        .where('user.phone = :phone', { phone })
+        .getOne();
+    }
+    return await this.userRepository.findOne({ where: { phone } });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async findAll(): Promise<User[]> {
+    return await this.userRepository.find();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async findOne(id: number): Promise<User | null> {
+    return await this.userRepository.findOneBy({ id });
+  }
+
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    return await this.userRepository.update(id, updateUserDto);
+  }
+
+  async remove(id: number) {
+    return await this.userRepository.delete(id);
   }
 }

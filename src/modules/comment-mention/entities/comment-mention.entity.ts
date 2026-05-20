@@ -12,7 +12,9 @@ export class CommentMention extends BaseEntity {
   @Column({ name: 'user_id' })
   user_id!: number;
 
-  @ManyToOne(() => PostComment, (comment) => comment.id, { onDelete: 'CASCADE' })
+  @ManyToOne(() => PostComment, (comment) => comment.id, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'comment_id' })
   comment!: PostComment;
 

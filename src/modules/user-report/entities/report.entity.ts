@@ -34,18 +34,29 @@ export class Report extends BaseEntity {
   @Column({ name: 'details', type: 'text', nullable: true })
   details?: string;
 
-  @Column({ name: 'status', type: 'enum', enum: ReportStatus, default: ReportStatus.PENDING })
+  @Column({
+    name: 'status',
+    type: 'enum',
+    enum: ReportStatus,
+    default: ReportStatus.PENDING,
+  })
   status!: ReportStatus;
 
   @ManyToOne(() => User, (user) => user.id, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'reporter_id' })
   reporter!: User;
 
-  @ManyToOne(() => Post, (post) => post.id, { nullable: true, onDelete: 'CASCADE' })
+  @ManyToOne(() => Post, (post) => post.id, {
+    nullable: true,
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'post_id' })
   post?: Post;
 
-  @ManyToOne(() => PostComment, (comment) => comment.id, { nullable: true, onDelete: 'CASCADE' })
+  @ManyToOne(() => PostComment, (comment) => comment.id, {
+    nullable: true,
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'comment_id' })
   comment?: PostComment;
 }

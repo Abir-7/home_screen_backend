@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsEnum, IsString, IsOptional, IsNumber } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsEnum,
+  IsString,
+  IsOptional,
+  IsNumber,
+} from 'class-validator';
 import { ReportReason } from '../entities/report.entity';
 
 export class CreateReportDto {

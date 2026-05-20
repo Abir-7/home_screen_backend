@@ -30,14 +30,21 @@ export class UserDeviceActivityService {
     return await this.repository.save(activity);
   }
 
-  async findOtherUsersByDeviceOrIp(user_id: number, deviceId: string, ipAddress: string) {
+  async findOtherUsersByDeviceOrIp(
+    user_id: number,
+    deviceId: string,
+    ipAddress: string,
+  ) {
     return await this.repository
       .createQueryBuilder('activity')
       .where('activity.user_id != :user_id', { user_id })
-      .andWhere('(activity.deviceId = :deviceId OR activity.ipAddress = :ipAddress)', {
-        deviceId,
-        ipAddress,
-      })
+      .andWhere(
+        '(activity.deviceId = :deviceId OR activity.ipAddress = :ipAddress)',
+        {
+          deviceId,
+          ipAddress,
+        },
+      )
       .distinctOn(['activity.user_id'])
       .getMany();
   }

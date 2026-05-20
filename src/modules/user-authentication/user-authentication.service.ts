@@ -10,16 +10,18 @@ export class UserAuthenticationService {
     private userAuthRepository: Repository<UserAuthentication>,
   ) {}
 
-  findAll() {
-    return this.userAuthRepository.find();
+  async findAll(): Promise<UserAuthentication[]> {
+    return await this.userAuthRepository.find();
   }
 
-  findOne(id: number) {
-    return this.userAuthRepository.findOneBy({ id });
+  async findOne(id: number): Promise<UserAuthentication | null> {
+    return await this.userAuthRepository.findOneBy({ id });
   }
 
-  create(authData: Partial<UserAuthentication>) {
+  async create(
+    authData: Partial<UserAuthentication>,
+  ): Promise<UserAuthentication> {
     const auth = this.userAuthRepository.create(authData);
-    return this.userAuthRepository.save(auth);
+    return await this.userAuthRepository.save(auth);
   }
 }

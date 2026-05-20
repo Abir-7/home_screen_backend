@@ -24,11 +24,23 @@ export class LocationCheckin {
   country!: string;
 
   @Index()
-  @Column({ name: 'latitude', type: 'decimal', precision: 9, scale: 6, nullable: true })
+  @Column({
+    name: 'latitude',
+    type: 'decimal',
+    precision: 9,
+    scale: 6,
+    nullable: true,
+  })
   latitude!: number;
 
   @Index()
-  @Column({ name: 'longitude', type: 'decimal', precision: 9, scale: 6, nullable: true })
+  @Column({
+    name: 'longitude',
+    type: 'decimal',
+    precision: 9,
+    scale: 6,
+    nullable: true,
+  })
   longitude!: number;
 
   @CreateDateColumn({ name: 'created_at' })

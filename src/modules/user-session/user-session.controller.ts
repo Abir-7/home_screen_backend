@@ -1,4 +1,12 @@
-import { Controller, Post, Body, Delete, Param, Get, Req } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Delete,
+  Param,
+  Get,
+  Req,
+} from '@nestjs/common';
 import { UserSessionService } from './user-session.service';
 import { CreateUserSessionDto } from './dto/create-user-session.dto';
 import { Request } from 'express';

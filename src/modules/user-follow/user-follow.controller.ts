@@ -27,7 +27,10 @@ export class UserFollowController {
     @Body() createUserFollowDto: CreateUserFollowDto,
   ) {
     const follower_id = req.user.id;
-    return await this.userFollowService.follow(follower_id, createUserFollowDto);
+    return await this.userFollowService.follow(
+      follower_id,
+      createUserFollowDto,
+    );
   }
 
   @Delete(':following_id')
