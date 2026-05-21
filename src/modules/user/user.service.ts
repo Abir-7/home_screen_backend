@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -17,7 +16,10 @@ export class UserService {
     return await this.userRepository.save(user);
   }
 
-  async findByEmail(email: string, includePassword = false): Promise<User | null> {
+  async findByEmail(
+    email: string,
+    includePassword = false,
+  ): Promise<User | null> {
     if (includePassword) {
       return await this.userRepository
         .createQueryBuilder('user')
@@ -28,7 +30,10 @@ export class UserService {
     return await this.userRepository.findOne({ where: { email } });
   }
 
-  async findByPhone(phone: string, includePassword = false): Promise<User | null> {
+  async findByPhone(
+    phone: string,
+    includePassword = false,
+  ): Promise<User | null> {
     if (includePassword) {
       return await this.userRepository
         .createQueryBuilder('user')
@@ -43,15 +48,15 @@ export class UserService {
     return await this.userRepository.find();
   }
 
-  async findOne(id: number): Promise<User | null> {
-    return await this.userRepository.findOneBy({ id });
+  async findOne(id: string): Promise<User | null> {
+    return await this.userRepository.findOneBy({ id: id });
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  async update(id: string, updateUserDto: UpdateUserDto) {
     return await this.userRepository.update(id, updateUserDto);
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     return await this.userRepository.delete(id);
   }
 }

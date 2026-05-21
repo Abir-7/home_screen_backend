@@ -6,10 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - '3100:3000'
     volumes:
       - .:/usr/src/app
-      - /usr/src/app/node_modules
+      - node_modules:/usr/src/app/node_modules
     env_file:
       - .env
     depends_on:
@@ -63,3 +63,4 @@ volumes:
   postgres_data:
   minio_data:
   redis_data:
+  node_modules:

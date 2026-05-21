@@ -32,7 +32,7 @@ export const comparePassword = async (
  */
 export const generateAccessToken = async (
   jwtService: JwtService,
-  payload: { sub: number; email: string },
+  payload: { userId: string; userRole: string },
 ): Promise<string> => {
   return await jwtService.signAsync(payload);
 };

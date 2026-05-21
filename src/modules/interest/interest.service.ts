@@ -14,8 +14,8 @@ export class InterestService {
     return this.interestRepository.find();
   }
 
-  findOne(id: number) {
-    return this.interestRepository.findOneBy({ id });
+  async findOne(id: string) {
+    return this.interestRepository.findOneBy({ id: id as any });
   }
 
   create(data: Partial<Interest>) {
@@ -23,12 +23,12 @@ export class InterestService {
     return this.interestRepository.save(interest);
   }
 
-  async update(id: number, data: Partial<Interest>) {
+  async update(id: string, data: Partial<Interest>) {
     await this.interestRepository.update(id, data);
     return this.findOne(id);
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.interestRepository.delete(id);
   }
 }

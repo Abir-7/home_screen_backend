@@ -14,8 +14,8 @@ export class CategoryService {
     return this.categoryRepository.find();
   }
 
-  findOne(id: number) {
-    return this.categoryRepository.findOneBy({ id });
+  async findOne(id: string) {
+    return this.categoryRepository.findOneBy({ id: id as any });
   }
 
   create(data: Partial<Category>) {
@@ -23,12 +23,12 @@ export class CategoryService {
     return this.categoryRepository.save(category);
   }
 
-  async update(id: number, data: Partial<Category>) {
+  async update(id: string, data: Partial<Category>) {
     await this.categoryRepository.update(id, data);
     return this.findOne(id);
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.categoryRepository.delete(id);
   }
 }

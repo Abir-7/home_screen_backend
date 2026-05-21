@@ -24,6 +24,9 @@ export class User extends BaseEntity {
   @Column({ name: 'is_verified', default: false })
   is_verified!: boolean;
 
+  @Column({ name: 'role', default: 'user' })
+  role!: string;
+
   @OneToOne(() => UserProfile, (profile) => profile.user)
   profile!: UserProfile;
 

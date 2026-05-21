@@ -27,24 +27,21 @@ export class UserPreferenceController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.userPreferenceService.findOne(+id);
+    return this.userPreferenceService.findOne(id as any);
   }
 
   @Get('user/:user_id')
   findByUserId(@Param('user_id') user_id: string) {
-    return this.userPreferenceService.findByUserId(+user_id);
+    return this.userPreferenceService.findByUserId(user_id as any);
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateUserPreferenceDto: UpdateUserPreferenceDto,
-  ) {
-    return this.userPreferenceService.update(+id, updateUserPreferenceDto);
+  update(@Param('id') id: string, @Body() updateUserPreferenceDto: UpdateUserPreferenceDto) {
+    return this.userPreferenceService.update(id, updateUserPreferenceDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.userPreferenceService.remove(+id);
+    return this.userPreferenceService.remove(id);
   }
 }

@@ -34,15 +34,15 @@ export class UserPreferenceService {
 
   async create(dto: CreateUserPreferenceDto) {
     const preference = this.userPreferenceRepository.create({
-      user_id: dto.user_id,
+      user: { id: dto.user_id as any },
       interests: dto.interest_ids?.map((id) => ({ id })),
       categories: dto.category_ids?.map((id) => ({ id })),
-    });
+    } as any);
     return this.userPreferenceRepository.save(preference);
   }
 
-  async update(id: number, dto: UpdateUserPreferenceDto) {
-    const preference = await this.findOne(id);
+  async update(id: string, dto: UpdateUserPreferenceDto) {
+    const preference = await this.findOne(id as any);
     if (!preference) {
       throw new NotFoundException(`UserPreference with ID ${id} not found`);
     }
@@ -60,7 +60,7 @@ export class UserPreferenceService {
     return this.userPreferenceRepository.save(preference);
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.userPreferenceRepository.delete(id);
   }
 }

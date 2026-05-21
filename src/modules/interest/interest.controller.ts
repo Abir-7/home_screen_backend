@@ -26,16 +26,16 @@ export class InterestController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.interestService.findOne(+id);
+    return this.interestService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() data: Partial<Interest>) {
-    return this.interestService.update(+id, data);
+  update(@Param('id') id: string, @Body() updateInterestDto: any) {
+    return this.interestService.update(id, updateInterestDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.interestService.remove(+id);
+    return this.interestService.remove(id);
   }
 }

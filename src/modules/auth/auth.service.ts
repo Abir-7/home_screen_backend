@@ -2,7 +2,6 @@
 import {
   Injectable,
   ConflictException,
-  InternalServerErrorException,
   UnauthorizedException,
   ForbiddenException,
   BadRequestException,
@@ -11,6 +10,7 @@ import { InjectQueue } from '@nestjs/bullmq';
 import { Queue } from 'bullmq';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
+import { VerifyOtpDto } from './dto/verify-otp.dto';
 import { UserService } from '../user/user.service';
 import { UserAuthenticationService } from '../user-authentication/user-authentication.service';
 import { AuthType } from '../user-authentication/entities/user-authentication.entity';
@@ -38,7 +38,6 @@ export class AuthService {
   }
 
   async login(loginDto: LoginDto) {
-    // ... (rest of method)
     const { email, phone, password } = loginDto;
     this.validateIdentifier(email, phone);
 
@@ -53,6 +52,9 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
+    // Load user profile
+    const userWithProfile = await this.userService.findOne(user.id);
+
     // Compare password
     const isPasswordValid = await comparePassword(password, user.password);
     if (!isPasswordValid) {
@@ -65,17 +67,19 @@ export class AuthService {
     }
 
     // Generate JWT token
-    const payload = { sub: user.id, email: user.email, phone: user.phone };
+    const payload = { userId: user.id, userRole: user.role || 'user' };
     const accessToken = await generateAccessToken(this.jwtService, payload);
-
-    // Remove password from response
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password: _, ...userWithoutPassword } = user;
+    const refreshToken = 'REFRESH_TOKEN_PLACEHOLDER'; // TODO: Implement refresh token logic
 
     return {
       message: 'Login successful',
-      user: userWithoutPassword,
-      access_token: accessToken,
+      user: {
+        userId: user.id,
+        userRole: user.role || 'user',
+        isProfileDataComplete: !!userWithProfile?.profile,
+      },
+      accessToken: accessToken,
+      refreshToken: refreshToken,
     };
   }
 
@@ -89,8 +93,17 @@ export class AuthService {
       : phone
         ? await this.userService.findByPhone(phone)
         : null;
+
     if (existingUser) {
-      throw new ConflictException('User already exists');
+      if (existingUser.is_verified) {
+        throw new ConflictException('User already exists');
+      }
+      // If user exists but is not verified, remove auth records and then delete the old user to allow re-registration
+      const existingAuth = await this.userAuthService.findOneByUser(existingUser.id);
+      if (existingAuth) {
+        await this.userAuthService.remove(existingAuth.id);
+      }
+      await this.userService.remove(existingUser.id);
     }
 
     // Hash password
@@ -125,7 +138,38 @@ export class AuthService {
 
     return {
       message: 'User registered. Please verify your account with the OTP sent.',
-      user: { id: user.id, email: user.email, phone: user.phone },
+      userId: user.id,
+    };
+  }
+
+  async verifyOtp(verifyOtpDto: VerifyOtpDto) {
+    const { userId, otp } = verifyOtpDto;
+
+    const user = await this.userService.findOne(userId);
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+
+    const auth = await this.userAuthService.findOneByUser(user.id);
+
+    if (!auth || auth.otp !== otp) {
+      throw new BadRequestException('Invalid OTP');
+    }
+
+    await this.userService.update(user.id, { is_verified: true });
+    await this.userAuthService.remove(auth.id);
+
+    // Generate JWT token
+    const payload = { userId: user.id, userRole: user.role || 'user' };
+    const accessToken = await generateAccessToken(this.jwtService, payload);
+    const refreshToken = 'REFRESH_TOKEN_PLACEHOLDER'; // TODO: Implement refresh token logic
+
+    return {
+      message: 'Account verified successfully',
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+      userId: user.id,
+      userRole: user.role || 'user',
     };
   }
 }
