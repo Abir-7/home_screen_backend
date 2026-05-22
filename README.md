@@ -3,36 +3,24 @@
 ## How to Run the Project
 
 ### Prerequisites
-- [Docker](https://www.docker.com/products/docker-desktop/)
-- [Docker Compose](https://docs.docker.com/compose/install/)
+- Node.js (v20+)
+- PostgreSQL
+- MinIO (or AWS S3 compatible storage)
+- Redis (for BullMQ)
 
-### Run with Docker (Recommended)
-This command starts the NestJS app, PostgreSQL database, and MinIO (local S3).
-
-1. **Setup environment variables:**
-   ```bash
-   cp .env.example .env
-   ```
-
-2. **Start the services:**
-   ```bash
-   docker-compose up --build
-   ```
-
-### Accessing the Services
-- **NestJS App:** [http://localhost:3000](http://localhost:3000) (Hot-reload enabled)
-- **PostgreSQL:** `localhost:5432`
-- **MinIO Console:** [http://localhost:9001](http://localhost:9001) (User: `minioadmin`, Pass: `minioadmin`)
-- **MinIO API (S3):** `http://localhost:9000`
-
----
-
-### Local Development (Without Docker)
+### Setup
 1. **Install dependencies:**
    ```bash
    npm install
    ```
-2. **Run in development mode:**
+
+2. **Setup environment variables:**
+   ```bash
+   cp .env.example .env
+   ```
+   Ensure your `.env` file points to your external services (PostgreSQL, MinIO, Redis, etc.).
+
+3. **Run in development mode:**
    ```bash
    npm run start:dev
    ```
